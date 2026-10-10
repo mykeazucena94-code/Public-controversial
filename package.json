@@ -1,0 +1,10 @@
+{
+  "name": "controversy-archive",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Source-backed research archive for controversial topics, with evidence labels and multiple perspectives.",
+  "main": "server.js",
+  "scripts": { "start": "node server.js", "dev": "node server.js" },
+  "engines": { "node": ">=18" },
+  "dependencies": { "express": "^4.21.2" }
+}
