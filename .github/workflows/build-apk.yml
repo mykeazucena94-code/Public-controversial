@@ -39,13 +39,44 @@ jobs:
         run: |
           echo "ANDROID_HOME=$ANDROID_HOME"
           sdkmanager --list_installed
+- name: Check project files
+    shell: bash
+    run: |
+      echo "=== Repository root ==="
+      pwd
+      ls -la
 
-      - name: Check project files
-        run: |
-          ls -la
-          test -f settings.gradle.kts -o -f settings.gradle
-          test -f gradlew
-          test -d app
+      failed=0
+
+      if [ -f settings.gradle.kts ] || [ -f settings.gradle ]; then
+        echo "OK: Gradle settings file found"
+      else
+        echo "ERROR: Missing settings.gradle.kts or settings.gradle"
+        failed=1
+      fi
+
+      if [ -f gradlew ]; then
+        echo "OK: gradlew found"
+      else
+        echo "ERROR: gradlew is missing"
+        failed=1
+      fi
+
+      if [ -d app ]; then
+        echo "OK: app/ folder found"
+      else
+        echo "ERROR: app/ folder is missing"
+        failed=1
+      fi
+
+      if [ "$failed" -ne 0 ]; then
+        echo "=== Top-level files and folders ==="
+        find . -maxdepth 3 -type f | sort | head -200
+        exit 1
+      fi
+
+      echo "All required project files found."
+
 
       - name: Make Gradle executable
         run: chmod +x gradlew
