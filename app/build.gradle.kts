@@ -14,14 +14,7 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
-        buildConfigField(
-            "String",
-            "BACKEND_URL",
-            "\"https://YOUR-RENDER-SERVICE.onrender.com\""
-        )
-    }
-
+buildConfigField("String", "BACKEND_URL", "\"https://public-controversial-5112.onrender.com\"")
     buildFeatures {
         buildConfig = true
     }
